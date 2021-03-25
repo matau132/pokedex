@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { DemoService } from './../demo.service';
-import { HttpClient } from '@angular/common/http';
+import { Pokemon } from '../pokemon';
+import { DemoService } from './../demo.service';
 
 @Component({
   selector: 'app-play-ground',
@@ -8,20 +8,19 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./play-ground.component.css']
 })
 export class PlayGroundComponent implements OnInit {
-  data:any;
-  constructor(private http:HttpClient) {
-    
-   }
-   getData(){
-    let url = 'https://pokeapi.co/api/v2/ability/?limit=3';
-    this.http.get(url).subscribe(t=>{this.data=t});
+  data:Pokemon[] = [];
+  p:number = 1;
+  constructor(private svc: DemoService) {
+
   }
 
   ngOnInit(): void {
-    this.getData();
-    console.log(this.data);
+    this.svc.getData().subscribe(res => this.getData(res) );
   }
 
+  getData(res) {
+    this.data = res.results;
+  }
 
 
 }

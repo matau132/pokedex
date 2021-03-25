@@ -1,23 +1,17 @@
-<div class="table-responsive">
+<div class="table-responsive container mt-5">
   <table class="table">
     <thead>
       <tr>
-        <th></th>
-        <th>asd</th>
-        <th>qwe</th>
+        <th>Name</th>
+        <th>Url</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td scope="row">asdad</td>
-        <td>qweq</td>
-        <td>qweqe</td>
-      </tr>
-      <tr>
-        <td scope="row">asdasd</td>
-        <td>asd</td>
-        <td>asdasd</td>
+      <tr *ngFor="let poke of data | paginate:{itemsPerPage:5,currentPage:p}">
+        <td scope="row"><a routerLink="/poke-detail/{{data.indexOf(poke)}}">{{poke.name}}</a></td>
+        <td>{{poke.url}}</td>
       </tr>
     </tbody>
   </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

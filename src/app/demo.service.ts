@@ -5,10 +5,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DemoService {
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getData(){
-      let url = 'https://pokeapi.co/api/v2/ability/?limit=3';
-      return this.http.get(url);
+  getData() {
+    let url = 'https://pokeapi.co/api/v2/ability/?limit=20';
+    return this.http.get(url);
   }
 }
