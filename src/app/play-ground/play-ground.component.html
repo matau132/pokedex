@@ -7,11 +7,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let poke of data | paginate:{itemsPerPage:5,currentPage:p}">
-        <td scope="row"><a routerLink="/poke-detail/{{data.indexOf(poke)}}">{{poke.name}}</a></td>
-        <td>{{poke.url}}</td>
+      <tr
+        *ngFor="
+          let poke of data | paginate: { itemsPerPage: 5, currentPage: p }
+        "
+      >
+        <td scope="row">
+          <span style="cursor: pointer; color: blue" (click)="detail(poke)">{{
+            poke.name
+          }}</span>
+        </td>
+        <td>{{ poke.url }}</td>
       </tr>
     </tbody>
   </table>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <div class="d-flex justify-content-center mt-4">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
