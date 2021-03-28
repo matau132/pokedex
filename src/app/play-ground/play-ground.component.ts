@@ -11,10 +11,12 @@ import { DemoService } from './../demo.service';
 export class PlayGroundComponent implements OnInit {
   data: Pokemon[] = [];
   p: number = 1;
-  constructor(private svc: DemoService, private route: Router) {}
+  total: number = 0;
+  constructor(private svc: DemoService, private route: Router) { }
 
   ngOnInit(): void {
-    this.svc.getData().subscribe((res) => this.getData(res));
+    this.svc.getData(this.p).subscribe((res) => this.getData(res));
+    this.svc.total().subscribe(res => this.getTotal(res['count']));
   }
 
   getData(res) {
@@ -26,5 +28,12 @@ export class PlayGroundComponent implements OnInit {
       .replace('https://pokeapi.co/api/v2/pokemon/', '')
       .replace('/', '');
     this.route.navigate([this.route.url + '/detail/' + poke_id]);
+  }
+  change(e) {
+    this.svc.getData(e).subscribe((res) => this.getData(res));
+    this.p = e;
+  }
+  getTotal(res){
+    this.total = res;
   }
 }

@@ -9,7 +9,7 @@
     <tbody>
       <tr
         *ngFor="
-          let poke of data | paginate: { itemsPerPage: 5, currentPage: p }
+          let poke of data | paginate: { itemsPerPage: 20, currentPage: p,totalItems: total }
         "
       >
         <td scope="row">
@@ -22,6 +22,6 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center mt-4">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="change($event)"></pagination-controls>
   </div>
 </div>
